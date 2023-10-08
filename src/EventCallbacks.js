@@ -1,6 +1,8 @@
-// import { insertAfter, removeElement, checkParent } from "./Dom.js"
-import { showAlert, showSpinner,removeSpinner,showCanvass } from "./helper.js"
-import { insertAfter, removeElement, checkParent } from "mmuo"
+import { showAlert, showSpinner,removeSpinner,showCanvass } from "./helper.js";
+import { insertAfter, removeElement, checkParent } from "mmuo";
+import { Modal } from 'bootstrap';
+
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 function alertBeforeRunning (event) {
     event.preventDefault();
@@ -45,7 +47,7 @@ function openAsModal (event) {
         withCredentials: true
       }).then((response) => {
         if(document.querySelector(".mmuo-modal") != null){
-            new bootstrap.Modal(document.getElementById('mmuo-modal')).hide();
+            new Modal(document.getElementById('mmuo-modal')).hide();
             document.querySelector(".mmuo-modal").remove();
         }
         
@@ -61,15 +63,15 @@ function openAsModal (event) {
         element.setAttribute('aria-hidden', 'true')
                         
         if(backdrop){
-            element.setAttribute('data-bs-backdrop', 'static')
+            element.setAttribute('data-bs-backdrop', 'static');
         }
                         
-        element.setAttribute('role', 'dialog')
+        element.setAttribute('role', 'dialog');
                         
         element.innerHTML = `
                         <div class='modal-dialog ${!shrink ? 'modal-xl' : null}'> 
                             <div class='modal-content'> <div class='modal-header'> 
-                            <button type='button' class='close-mmuo-modal btn-close' data-bs-dismiss='modal' aria-hidden='true' aria-label='Close'></button> 
+                            <button type='button' class='close-mmuo-modal btn-close' data-bs-dismiss='modal' aria-hidden='true' aria-label='Close'></button>
                             </div> 
                             <div class='modal-body'>
                                 ${response.data} 
@@ -78,7 +80,7 @@ function openAsModal (event) {
 
         document.body.appendChild(element);
 					   
-        var modal = new bootstrap.Modal(document.getElementById('mmuo-modal'))
+        var modal = new Modal(document.getElementById('mmuo-modal'))
            
         modal.show()
     }).catch((error) => {

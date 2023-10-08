@@ -1,6 +1,6 @@
-# Mmuo
+# Ije
 
-Mmuo is a Javascript library for making AJAX requests, alternative to native browser `alert()` function, image/file upload and many other 'utility' features that will/can be added at interval basis (or in the future) - This is why it is called **Mmuo** (the Igbo Language name of "spirit"); because you won't see it coming.
+Ije is a Javascript library for making AJAX requests, alternative to native browser `alert()` function, image/file upload and many other 'utility' features that will/can be added at interval basis (or in the future) - This is why it is called **Ije** - because we're on a `journey` to making front-end development fun.
 
 Especially for AJAX requests, you don't have to create AJAX scripts/files for different/specific pages anymore. This single package can take care of any AJAX request for you (as well as the following listed below). The package does the following at the moment (but can always be extended to include more features in the future):
 
@@ -8,8 +8,10 @@ Especially for AJAX requests, you don't have to create AJAX scripts/files for di
 - Replacement of native browser's `alert()` function
 - Performing AJAX **GET** requests
 - Performing AJAX **POST** requests
-- Exposes some AJAX loading indicator functions which you can use for your project
-- Lazy-load Image(s)
+- Exposes some AJAX loading indicator functions which you can use for your project (Modal, Alert box, etc).
+- Triggers events on successful AJAX completion
+- Displays pages as Modal
+- Etc.
 
 ## Table of Contents
 
@@ -40,13 +42,13 @@ Especially for AJAX requests, you don't have to create AJAX scripts/files for di
 To get started all you need to do is:
 
 ```bash
-npm install mmuo
+npm install ije
 ```
 
 and you're in. The package exposes a `registerEventListeners()` function which already has some event listeners and classes for you to just dive right in. Simply import the function into your project and use right away. Example:
 
 ```javascript
-import {registerEventListeners} from "mmuo"
+import {registerEventListeners} from "ije"
 
 //Always nice to register events when the DOM has been fully loaded
 window.addEventListener("DOMContentLoaded", function() {
@@ -57,7 +59,7 @@ window.addEventListener("DOMContentLoaded", function() {
 OR,
 
 ```javascript
-window.mmuo = require("mmuo");
+window.mmuo = require("ije");
 
 //Always nice to register events when the DOM has been fully loaded
 window.addEventListener("DOMContentLoaded", function() {
@@ -65,12 +67,11 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 ```
 
-Or, if you prefer to link via `<script>` in HTML, especially if you don't use a bundler, then prefix the function(s) with **"`mmuo`"**:
+Or, if you prefer to link via `<script>` in HTML, especially if you don't use a bundler, then prefix the function(s) with **"`ije`"**:
 
 ```javascript
-<script src="/path_to_node_module_or_installation_directory/mmuo/dist/mmuo.umd.js"></script>   
+<script src="/path_to_node_module_or_installation_directory/ije/dist/ije.umd.js"></script>   
 <script src="/path_to_axios_node_module_installation_directory"></script> 
-<script src="/path_to_bootstrap_node_module_installation_directory"></script> 
 
 <script>
     window.addEventListener("DOMContentLoaded", function() {
@@ -79,12 +80,10 @@ Or, if you prefer to link via `<script>` in HTML, especially if you don't use a 
 </script>
 ```
 
-> Please note that this package requires Bootsrap to function effectively. And if you'll work with AJAX request, this package requires Axios as well. If you use a bundler you should import these dependencies into your application and set "bootstrap" and "axios" window variables. Example:
+> Please note that this package requires Bootstrap (for styling) to function effectively. And if you'll work with AJAX request, this package requires Axios as well. If you use a bundler you should import these dependencies into your application and set "axios" window variables. Example:
 
 ```javascript
 //app.js or main.js
-window.bootstrap = require('bootstrap');
-
 window.axios = require('axios');
 ```
 
@@ -92,20 +91,17 @@ OR,
 
 ```javascript
 //app.js or main.js
-import * as bootstrap from '~bootstrap';
 import axios from 'axios';
-
-window.bootstrap =  bootstrap
 
 window.axios = axios;
 ```
 
-Please note that the `registerEventListeners` registers multiple events in the DOm. However, there may be case(s) where you just need to register or use a single event - for instance, only AJAX POST/Form request. In this case you should just import the needed event only. The event name is usually the function name suffixed with `'Event'`.
+Please note that the `registerEventListeners` registers multiple events in the DOM. However, there may be case(s) where you just need to register or use a single event - for instance, only AJAX POST/Form request. In this case you should just import the needed event only. The event name is usually the function name suffixed with `'Event'`.
 
 For instance, to use only the `triggerFileChanger` event in your project you will do:
 
 ```javascript
-import {triggerFileChangerEvent} from "mmuo"
+import {triggerFileChangerEvent} from "ije"
 
 //Always nice to register events when the DOM has been fully loaded
 window.addEventListener("DOMContentLoaded", function() {
