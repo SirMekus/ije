@@ -1,6 +1,6 @@
 # Ije
 
-Ije is a Javascript library for making AJAX requests, alternative to native browser `alert()` function, image/file upload and many other 'utility' features that will/can be added at interval basis (or in the future) - This is why it is called **Ije** (the Igbo Language word for "journey"); because you we are on a journey and the features won't end here.
+Ije is a Javascript library for making AJAX requests, alternative to native browser `alert()` function, image/file upload and many other 'utility' features that will/can be added at interval basis (or in the future) - This is why it is called **Ije** - because we're on a `journey` to making front-end development fun.
 
 Especially for AJAX requests, you don't have to create AJAX scripts/files for different/specific pages anymore. This single package can take care of any AJAX request for you (as well as the following listed below). The package does the following at the moment (but can always be extended to include more features in the future):
 
@@ -8,7 +8,10 @@ Especially for AJAX requests, you don't have to create AJAX scripts/files for di
 - Replacement of native browser's `alert()` function
 - Performing AJAX **GET** requests
 - Performing AJAX **POST** requests
-- Exposes some AJAX loading indicator functions which you can use for your project
+- Exposes some AJAX loading indicator functions which you can use for your project (Modal, Alert box, etc).
+- Triggers events on successful AJAX completion
+- Displays pages as Modal
+- Etc.
 
 ## Table of Contents
 
@@ -66,7 +69,6 @@ Or, if you prefer to link via `<script>` in HTML, especially if you don't use a 
 ```javascript
 <script src="/path_to_node_module_or_installation_directory/ije/dist/ije.umd.js"></script>   
 <script src="/path_to_axios_node_module_installation_directory"></script> 
-<script src="/path_to_bootstrap_node_module_installation_directory"></script> 
 
 <script>
     window.addEventListener("DOMContentLoaded", function() {
@@ -75,12 +77,10 @@ Or, if you prefer to link via `<script>` in HTML, especially if you don't use a 
 </script>
 ```
 
-> Please note that this package requires Bootstrap and [Mmuo](https://www.github.com/SirMekus/mmuo) packages to function effectively. And if you'll work with AJAX request, this package requires Axios as well. If you use a bundler you should import these dependencies into your application and set "bootstrap" and "axios" window variables. Example:
+> Please note that this package requires Bootstrap (for styling) to function effectively. And if you'll work with AJAX request, this package requires Axios as well. If you use a bundler you should import these dependencies into your application and set "axios" window variables. Example:
 
 ```javascript
 //app.js or main.js
-window.bootstrap = require('bootstrap');
-
 window.axios = require('axios');
 ```
 
@@ -88,10 +88,7 @@ OR,
 
 ```javascript
 //app.js or main.js
-import * as bootstrap from '~bootstrap';
 import axios from 'axios';
-
-window.bootstrap =  bootstrap
 
 window.axios = axios;
 ```

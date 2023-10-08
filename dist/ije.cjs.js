@@ -3,63 +3,51 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var mmuo = require('mmuo');
+var bootstrap = require('bootstrap');
 
 function showCanvass(msg) {
   //Just in case one have been created already, we remove it
-  if (document.querySelector("#offcanvasBottom") != null) {
-    document.querySelector("#offcanvasBottom").remove();
+  var offcanvasBottom = mmuo.element('#offcanvasBottom', false);
+
+  if (offcanvasBottom.isPresent()) {
+    offcanvasBottom.remove();
   }
 
-  var div = document.createElement('div');
-  div.className = 'offcanvas offcanvas-bottom';
-  div.id = 'offcanvasBottom';
-  div.setAttribute('tabindex', -1);
-  div.setAttribute('aria-labelledby', 'offcanvasBottomLabel');
-  div.innerHTML = "<div class='offcanvas-header d-flex justify-content-center'>\n        <h5 class='offcanvas-title text-center' id='offcanvasBottomLabel'>".concat(msg, "</h5>\n      </div>");
-  div.style.height = "80px";
-  document.body.appendChild(div);
+  mmuo.element('div').addClasses('offcanvas offcanvas-bottom').id('offcanvasBottom').attr('tabindex', -1).attr('aria-labelledby', 'offcanvasBottomLabel').text("<div class='offcanvas-header d-flex justify-content-center'>\n    <h5 class='offcanvas-title text-center' id='offcanvasBottomLabel'>".concat(msg, "</h5>\n    </div>")).css('height', "80px").appendTo(document.body);
   new bootstrap.Offcanvas(document.getElementById("offcanvasBottom")).show();
 }
 
 function showSpinner() {
-  //Just in case one have been created already, we remove it
-  if (document.querySelector(".spinner-div") != null) {
-    document.querySelector(".spinner-div").remove();
+  //Just in case one have been created already, we remove i
+  var spinnderDiv = mmuo.element('.spinner-div', false);
+
+  if (spinnderDiv.isPresent()) {
+    spinnderDiv.remove();
   }
 
-  var div = document.createElement('div');
-  div.className = 'd-flex justify-content-center spinner-div';
-  div.innerHTML = "<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div";
-  document.body.appendChild(div);
+  mmuo.element('div').addClasses('d-flex justify-content-center spinner-div').text("<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div").appendTo(document.body);
 }
 
 function removeSpinner() {
   //Just in case one have been created already, we remove it
-  if (document.querySelector(".spinner-div") != null) {
-    document.querySelector(".spinner-div").remove();
+  var spinnderDiv = mmuo.element('.spinner-div', false);
+
+  if (spinnderDiv.isPresent()) {
+    spinnderDiv.remove();
   }
 }
 
 function showAlert(caption, href, textWord) {
   var classToUse = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   var bc = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-
   //Just in case one have been created already, we remove it
-  if (document.querySelector(".alert-modal") != null) {
-    document.querySelectorAll(".alert-modal").forEach(function (currentValue, currentIndex, listObj) {
-      listObj[currentIndex].remove();
-    }); //document.querySelector(".modal").remove();
+  var alertModal = mmuo.element('.alert-modal', false);
+
+  if (alertModal.isPresent()) {
+    alertModal.remove();
   }
 
-  var div = document.createElement('div');
-  div.className = 'modal fade alert-modal';
-  div.id = 'myModal';
-  div.setAttribute('tabindex', -1);
-  div.setAttribute('role', 'dialog');
-  div.setAttribute('aria-labelledby', 'myModalLabel');
-  div.setAttribute('aria-hidden', 'true');
-  div.innerHTML = "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>".concat(caption, "</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='").concat(href, "' class='ms-2 ").concat(classToUse, " btn btn-danger btn-lg' data-bc=\"").concat(bc, "\">").concat(capitalLetters(textWord), "</a></div></div> <div id='responseArea'></div></div></div> </div></div>");
-  document.body.appendChild(div);
+  mmuo.element('div').addClasses('modal fade alert-modal').attr('tabindex', -1).attr('role', 'dialog').attr('aria-labelledby', 'myModalLabel').attr('aria-hidden', 'true').text("<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>".concat(caption, "</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='").concat(href, "' class='ms-2 ").concat(classToUse, " btn btn-danger btn-lg' data-bc=\"").concat(bc, "\">").concat(capitalLetters(textWord), "</a></div></div> <div id='responseArea'></div></div></div> </div></div>")).appendTo(document.body);
   new bootstrap.Modal(document.getElementById("myModal")).show();
 }
 
@@ -81,16 +69,13 @@ function DisplayAsToast(msg) {
   } //Just in case one has been created already, we remove it
 
 
-  if (document.querySelector("#notificationToastDiv") != null) {
-    document.querySelector("#notificationToastDiv").remove();
+  var notificationToastDiv = mmuo.element('#notificationToastDiv', false);
+
+  if (notificationToastDiv.isPresent()) {
+    notificationToastDiv.remove();
   }
 
-  var div = document.createElement('div');
-  div.className = 'position-fixed top-0 end-0 p-3 d-flex justify-content-end';
-  div.id = 'notificationToastDiv';
-  div.style.zIndex = '1100';
-  div.innerHTML = "<div id=\"notificationToast\" class=\"toast ".concat(bgClass, " text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n        <div class=\"toast-body\">\n          <button type=\"button\" class=\"btn-close float-end\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n          ").concat(msg, "\n        </div>\n      </div>");
-  document.body.appendChild(div);
+  mmuo.element('div').addClasses('position-fixed top-0 end-0 p-3 d-flex justify-content-end').id('notificationToastDiv').text("<div id=\"notificationToast\" class=\"toast ".concat(bgClass, " text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n    <div class=\"toast-body\">\n      <button type=\"button\" class=\"btn-close float-end\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n      ").concat(msg, "\n    </div>\n    </div>")).css('zIndex', '1100').appendTo(document.body);
   new bootstrap.Toast(document.getElementById("notificationToast")).show();
 }
 
@@ -323,6 +308,8 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 function alertBeforeRunning(event) {
   event.preventDefault();
   var clickedLink = event.currentTarget;
@@ -377,7 +364,7 @@ function openAsModal(event) {
     }
 
     element.setAttribute('role', 'dialog');
-    element.innerHTML = "\n                        <div class='modal-dialog ".concat(!shrink ? 'modal-xl' : null, "'> \n                            <div class='modal-content'> <div class='modal-header'> \n                            <button type='button' class='close-mmuo-modal btn-close' data-bs-dismiss='modal' aria-hidden='true' aria-label='Close'></button> \n                            </div> \n                            <div class='modal-body'>\n                                ").concat(response.data, " \n                            </div> \n                        </div>");
+    element.innerHTML = "\n                        <div class='modal-dialog ".concat(!shrink ? 'modal-xl' : null, "'> \n                            <div class='modal-content'> <div class='modal-header'> \n                            <button type='button' class='close-mmuo-modal btn-close' data-bs-dismiss='modal' aria-hidden='true' aria-label='Close'></button>\n                            </div> \n                            <div class='modal-body'>\n                                ").concat(response.data, " \n                            </div> \n                        </div>");
     document.body.appendChild(element);
     var modal = new bootstrap.Modal(document.getElementById('mmuo-modal'));
     modal.show();
