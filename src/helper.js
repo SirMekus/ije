@@ -1,4 +1,4 @@
-import { element as $ } from "mmuo"
+import { element as $, capitalLetters  } from "mmuo"
 import { Offcanvas, Modal, Toast } from 'bootstrap';
 
 function showCanvass(msg) {
@@ -11,7 +11,7 @@ function showCanvass(msg) {
 
     $('div').addClasses('offcanvas offcanvas-bottom').id('offcanvasBottom').attr('tabindex', -1)
     .attr('aria-labelledby', 'offcanvasBottomLabel')
-    .text(`<div class='offcanvas-header d-flex justify-content-center'>
+    .html(`<div class='offcanvas-header d-flex justify-content-center'>
     <h5 class='offcanvas-title text-center' id='offcanvasBottomLabel'>${msg}</h5>
     </div>`).css('height', "80px").appendTo(document.body)
 
@@ -26,7 +26,7 @@ function showSpinner() {
     }
 
     $('div').addClasses('d-flex justify-content-center spinner-div')
-    .text(`<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div`).appendTo(document.body);
+    .html(`<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div`).appendTo(document.body);
 }
 
 function removeSpinner() {
@@ -44,8 +44,8 @@ function showAlert(caption, href, textWord, classToUse=null, bc=null) {
         alertModal.remove();
     }
 
-    $('div').addClasses('modal fade alert-modal').attr('tabindex', -1).attr('role', 'dialog').attr('aria-labelledby', 'myModalLabel').attr('aria-hidden', 'true')
-    .text(`<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>${caption}</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='${href}' class='ms-2 ${classToUse} btn btn-danger btn-lg' data-bc="${bc}">${capitalLetters(textWord)}</a></div></div> <div id='responseArea'></div></div></div> </div></div>`).appendTo(document.body)
+    $('div').id('myModal').addClasses('modal fade alert-modal').attr('tabindex', -1).attr('role', 'dialog').attr('aria-labelledby', 'myModalLabel').attr('aria-hidden', 'true')
+    .html(`<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>${caption}</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='${href}' class='ms-2 ${classToUse} btn btn-danger btn-lg' data-bc="${bc}">${capitalLetters(textWord)}</a></div></div> <div id='responseArea'></div></div></div> </div></div>`).appendTo(document.body)
       
     new Modal(document.getElementById("myModal")).show();
 }
@@ -73,7 +73,7 @@ function DisplayAsToast(msg, status='info') {
     }
 
     $('div').addClasses('position-fixed top-0 end-0 p-3 d-flex justify-content-end').id('notificationToastDiv')
-    .text(`<div id="notificationToast" class="toast ${bgClass} text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    .html(`<div id="notificationToast" class="toast ${bgClass} text-white" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
       <button type="button" class="btn-close float-end" data-bs-dismiss="toast" aria-label="Close"></button>
       ${msg}

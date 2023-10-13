@@ -13,7 +13,7 @@ function showCanvass(msg) {
     offcanvasBottom.remove();
   }
 
-  mmuo.element('div').addClasses('offcanvas offcanvas-bottom').id('offcanvasBottom').attr('tabindex', -1).attr('aria-labelledby', 'offcanvasBottomLabel').text("<div class='offcanvas-header d-flex justify-content-center'>\n    <h5 class='offcanvas-title text-center' id='offcanvasBottomLabel'>".concat(msg, "</h5>\n    </div>")).css('height', "80px").appendTo(document.body);
+  mmuo.element('div').addClasses('offcanvas offcanvas-bottom').id('offcanvasBottom').attr('tabindex', -1).attr('aria-labelledby', 'offcanvasBottomLabel').html("<div class='offcanvas-header d-flex justify-content-center'>\n    <h5 class='offcanvas-title text-center' id='offcanvasBottomLabel'>".concat(msg, "</h5>\n    </div>")).css('height', "80px").appendTo(document.body);
   new bootstrap.Offcanvas(document.getElementById("offcanvasBottom")).show();
 }
 
@@ -25,7 +25,7 @@ function showSpinner() {
     spinnderDiv.remove();
   }
 
-  mmuo.element('div').addClasses('d-flex justify-content-center spinner-div').text("<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div").appendTo(document.body);
+  mmuo.element('div').addClasses('d-flex justify-content-center spinner-div').html("<div class='spinner-grow position-fixed' role='status' style='left: 50%; top: 50%; height:60px; width:60px; margin:0px auto; position: absolute; z-index:1000; color:var(--color-theme)'><span class='sr-only'>Loading...</span></div").appendTo(document.body);
 }
 
 function removeSpinner() {
@@ -47,7 +47,7 @@ function showAlert(caption, href, textWord) {
     alertModal.remove();
   }
 
-  mmuo.element('div').addClasses('modal fade alert-modal').attr('tabindex', -1).attr('role', 'dialog').attr('aria-labelledby', 'myModalLabel').attr('aria-hidden', 'true').text("<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>".concat(caption, "</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='").concat(href, "' class='ms-2 ").concat(classToUse, " btn btn-danger btn-lg' data-bc=\"").concat(bc, "\">").concat(capitalLetters(textWord), "</a></div></div> <div id='responseArea'></div></div></div> </div></div>")).appendTo(document.body);
+  mmuo.element('div').id('myModal').addClasses('modal fade alert-modal').attr('tabindex', -1).attr('role', 'dialog').attr('aria-labelledby', 'myModalLabel').attr('aria-hidden', 'true').html("<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-hidden='true'> </button> </div> <div class='modal-body'><div class='card'> <div class='card-body'><h5 class='card-title d-flex justify-content-center'>".concat(caption, "</h5></div><div class='card-footer'> <div class='btn-group d-flex justify-content-center' data-toggle='buttons'> <button type='button' class='close close-alert btn btn-dark btn-lg' data-bs-dismiss='modal' aria-hidden='true'>Cancel</button><a href='").concat(href, "' class='ms-2 ").concat(classToUse, " btn btn-danger btn-lg' data-bc=\"").concat(bc, "\">").concat(mmuo.capitalLetters(textWord), "</a></div></div> <div id='responseArea'></div></div></div> </div></div>")).appendTo(document.body);
   new bootstrap.Modal(document.getElementById("myModal")).show();
 }
 
@@ -75,7 +75,7 @@ function DisplayAsToast(msg) {
     notificationToastDiv.remove();
   }
 
-  mmuo.element('div').addClasses('position-fixed top-0 end-0 p-3 d-flex justify-content-end').id('notificationToastDiv').text("<div id=\"notificationToast\" class=\"toast ".concat(bgClass, " text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n    <div class=\"toast-body\">\n      <button type=\"button\" class=\"btn-close float-end\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n      ").concat(msg, "\n    </div>\n    </div>")).css('zIndex', '1100').appendTo(document.body);
+  mmuo.element('div').addClasses('position-fixed top-0 end-0 p-3 d-flex justify-content-end').id('notificationToastDiv').html("<div id=\"notificationToast\" class=\"toast ".concat(bgClass, " text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n    <div class=\"toast-body\">\n      <button type=\"button\" class=\"btn-close float-end\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n      ").concat(msg, "\n    </div>\n    </div>")).css('zIndex', '1100').appendTo(document.body);
   new bootstrap.Toast(document.getElementById("notificationToast")).show();
 }
 
@@ -257,59 +257,6 @@ function removePhoto(index) {
   // 	    })
 }
 
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-
-  return target;
-}
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 function alertBeforeRunning(event) {
   event.preventDefault();
   var clickedLink = event.currentTarget;
@@ -411,230 +358,6 @@ function getRequest(event) {
   }
 }
 
-function postRequest(event) {
-  event.preventDefault();
-  var this_form = event.currentTarget;
-  var submit_button = this_form.querySelector("input[type='submit']") || this_form.querySelector("button[type='submit']");
-
-  if (this_form.querySelector(".div.success")) {
-    this_form.querySelector(".div.success").remove();
-  }
-
-  var div = document.createElement("div");
-  div.className = "success";
-  var childNode = mmuo.checkParent(this_form, submit_button);
-  this_form.insertBefore(div, childNode);
-  var responseArea = this_form.querySelector(".success");
-
-  if (this_form.querySelector("#hidden_content") != null) {
-    this_form.querySelector("#hidden_content").value = frames["richedit"].document.body.innerHTML;
-  }
-
-  var notFilled = false; //We make sure those fields that are required are filled incase the user mistakenly skips any.
-
-  this_form.querySelectorAll("input").forEach(function (currentValue, currentIndex, listObj) {
-    var currentNode = listObj[currentIndex];
-
-    if (currentNode.dataset.name != undefined || currentNode.getAttribute("required") != undefined) {
-      if (currentNode.value == "") {
-        notFilled = true;
-        var name = currentNode.dataset.name || currentNode.getAttribute("name");
-        currentNode.classList.remove("is-valid");
-        currentNode.classList.add("is-invalid");
-        responseArea.innerHTML = "<span class='text-danger'>You should fill in the " + capitalLetters(name) + " field before you proceed</span>";
-        return false;
-      }
-
-      currentNode.classList.remove("is-invalid");
-      currentNode.classList.add("is-valid");
-    }
-  });
-
-  if (notFilled == true) {
-    return false;
-  }
-
-  var sub_value = submit_button.value;
-  var action = this_form.getAttribute("action");
-  var method = this_form.getAttribute('method') || 'post';
-  var data_to_send = new FormData(this_form);
-  showSpinner();
-  submit_button.value = "...in progress";
-  submit_button.setAttribute("disabled", "disabled");
-  var config = {
-    url: action,
-    method: method,
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest'
-    }
-  };
-
-  switch (method.toLowerCase()) {
-    case 'patch':
-    case "put":
-    case "delete":
-    case "post":
-      config = _objectSpread2(_objectSpread2({}, config), {}, {
-        data: this_form.dataset.json ? JSON.parse(JSON.stringify(Object.fromEntries(data_to_send))) : data_to_send
-      });
-      break;
-
-    default:
-      config = _objectSpread2(_objectSpread2({}, config), {}, {
-        params: JSON.parse(JSON.stringify(Object.fromEntries(data_to_send)))
-      });
-  }
-
-  axios.request(config).then(function (response) {
-    var _response$data, _response$data$messag, _response$data2;
-
-    mmuo.removeElement(this_form, ".server-response");
-
-    if (this_form.dataset.bc) {
-      document.dispatchEvent(new CustomEvent(this_form.dataset.bc, {
-        detail: response
-      }));
-    }
-
-    if ((_response$data = response.data) !== null && _response$data !== void 0 && (_response$data$messag = _response$data.message) !== null && _response$data$messag !== void 0 && _response$data$messag.url || (_response$data2 = response.data) !== null && _response$data2 !== void 0 && _response$data2.url) {
-      var _response$data3, _response$data3$messa, _response$data4;
-
-      var url = ((_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : (_response$data3$messa = _response$data3.message) === null || _response$data3$messa === void 0 ? void 0 : _response$data3$messa.url) || ((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.url);
-
-      if (this_form.dataset.ext) {
-        window.open(url, '_ext');
-      } else {
-        location.href = url;
-      }
-    } else {
-      var _ref, _response$data$messag2;
-
-      var serverResponse = (_ref = response.data.msg || ((_response$data$messag2 = response.data.message) === null || _response$data$messag2 === void 0 ? void 0 : _response$data$messag2.message) || response.data.message) !== null && _ref !== void 0 ? _ref : response.data;
-
-      if (_typeof(serverResponse) == 'object') {
-        var _submit_button$datase;
-
-        serverResponse = (_submit_button$datase = submit_button.dataset.mSuccess) !== null && _submit_button$datase !== void 0 ? _submit_button$datase : "Operation was successful";
-      }
-
-      responseArea.innerHTML = "<span class='text-success fw-bold'>".concat(serverResponse, "</span>");
-    }
-  }).catch(function (error) {
-    var _error$response$data$2, _ref2;
-
-    if (!error || !error.response) {
-      return;
-    }
-
-    mmuo.removeElement(this_form, ".server-response");
-
-    switch (error.response.status) {
-      case 422:
-        var items = error.response.data.errors;
-
-        if (items != undefined) {
-          for (var item in items) {
-            //This may be an element that is dynamically added to the form field, thus may not always be present in the DOM
-            if (this_form.querySelector("[name='".concat(item, "']")) == null) {
-              continue;
-            }
-
-            var sibling = this_form.querySelector("[name='".concat(item, "']")).nextElementSibling;
-            var id = "".concat(item, "_mmuo");
-
-            if (sibling == null) {
-              //Then we need to create it
-              var element = document.createElement("div");
-              element.id = id;
-              element.className = "server-response text-danger";
-              mmuo.insertAfter(element, this_form.querySelector("[name='".concat(item, "']")));
-            } else {
-              if (sibling.id != id) {
-                var element = document.createElement("div");
-                element.id = id;
-                element.className = "server-response text-danger";
-                mmuo.insertAfter(element, sibling);
-              }
-            }
-
-            var responseForElement = this_form.querySelector("#".concat(id));
-            responseForElement.innerHTML = items[item][0];
-          }
-
-          if (items.length > 1) {
-            responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>Please make sure you fill required fields in the form and try again.</span>";
-          } else {
-            responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>".concat(error.response.data.message, "</span>");
-          }
-        } else {
-          var _error$response$data, _error$response$data$, _error$response$data2, _error$response$data3, _error$response$data4, _error$response$data5;
-
-          if ((_error$response$data = error.response.data) !== null && _error$response$data !== void 0 && (_error$response$data$ = _error$response$data.message) !== null && _error$response$data$ !== void 0 && _error$response$data$.message) {
-            var msg = error.response.data.message.message;
-          } else if ((_error$response$data2 = error.response.data) !== null && _error$response$data2 !== void 0 && _error$response$data2.message) {
-            var msg = error.response.data.message;
-          } else {
-            var msg = error.response.data;
-          }
-
-          responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>" + msg + "</span>";
-
-          if ((_error$response$data3 = error.response.data) !== null && _error$response$data3 !== void 0 && (_error$response$data4 = _error$response$data3.message) !== null && _error$response$data4 !== void 0 && _error$response$data4.target || (_error$response$data5 = error.response.data) !== null && _error$response$data5 !== void 0 && _error$response$data5.target) {
-            var _error$response$data6;
-
-            var inputName = error.response.data.message.target || ((_error$response$data6 = error.response.data) === null || _error$response$data6 === void 0 ? void 0 : _error$response$data6.target); //This may be an element that is dynamically added to the form field, thus may not always be present in the DOM
-
-            if (this_form.querySelector("[name='".concat(inputName, "']")) != null) {
-              var sibling = this_form.querySelector("[name='".concat(inputName, "']")).nextElementSibling;
-
-              var _id = "".concat(inputName, "_mmuo");
-
-              if (sibling == null) {
-                //Then we need to create it
-                var element = document.createElement("div");
-                element.id = _id;
-                element.className = "server-response text-danger fw-bold";
-                mmuo.insertAfter(element, this_form.querySelector("[name='".concat(inputName, "']")));
-              } else {
-                if (sibling.id != _id) {
-                  var element = document.createElement("div");
-                  element.id = _id;
-                  element.className = "server-response text-danger fw-bold";
-                  mmuo.insertAfter(element, sibling);
-                }
-              }
-
-              var responseForElement = this_form.querySelector("#".concat(_id));
-              responseForElement.innerHTML = msg;
-            }
-          }
-        }
-
-        break;
-
-      case 401:
-        responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>" + error.response.data.message + "</span>";
-        break;
-
-      case 403:
-        var forbidden = (_error$response$data$2 = error.response.data.message) !== null && _error$response$data$2 !== void 0 ? _error$response$data$2 : error.response.data;
-        responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>" + forbidden + "</span>";
-        break;
-
-      case 404:
-        responseArea.innerHTML = (_ref2 = "<span class='server-response text-danger fw-bold'>" + error.response.data.message) !== null && _ref2 !== void 0 ? _ref2 : error.response.data + "</span>";
-        break;
-
-      default:
-        responseArea.innerHTML = "<span class='server-response text-danger fw-bold'>There was a problem in submission. Please try again</span>";
-    }
-  }).then(function () {
-    submit_button.value = sub_value;
-    submit_button.removeAttribute("disabled");
-    removeSpinner();
-  });
-}
-
 function triggerFileChangerEvent() {
   mmuo.on(".select-photo", "click", triggerFileChanger);
 }
@@ -659,10 +382,6 @@ function getRequestEvent() {
   mmuo.on(".run-get-request", "click", getRequest);
 }
 
-function postRequestEvent() {
-  mmuo.on("#form .form", "submit", postRequest);
-}
-
 function registerEventListeners() {
   triggerFileChangerEvent();
   uploadImageEvent();
@@ -670,9 +389,7 @@ function registerEventListeners() {
   openAsModalEvent(); //function to run when user attempts to run any feature that first needs coonfirmation. This replaces the native "alert" prompt of browsers.
 
   alertBeforeRunningEvent();
-  getRequestEvent(); //General for all pages that use a POST submit method especially.
-
-  postRequestEvent();
+  getRequestEvent();
 }
 
 exports.DisplayAsToast = DisplayAsToast;
@@ -681,8 +398,6 @@ exports.alertBeforeRunningEvent = alertBeforeRunningEvent;
 exports.getRequest = getRequest;
 exports.getRequestEvent = getRequestEvent;
 exports.openAsModalEvent = openAsModalEvent;
-exports.postRequest = postRequest;
-exports.postRequestEvent = postRequestEvent;
 exports.registerEventListeners = registerEventListeners;
 exports.removeImageEvent = removeImageEvent;
 exports.removeSpinner = removeSpinner;

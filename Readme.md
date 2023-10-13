@@ -2,14 +2,12 @@
 
 Ije is a Javascript library for making AJAX requests, alternative to native browser `alert()` function, image/file upload and many other 'utility' features that will/can be added at interval basis (or in the future) - This is why it is called **Ije** - because we're on a `journey` to making front-end development fun.
 
-Especially for AJAX requests, you don't have to create AJAX scripts/files for different/specific pages anymore. This single package can take care of any AJAX request for you (as well as the following listed below). The package does the following at the moment (but can always be extended to include more features in the future):
+ The package does the following at the moment (but can always be extended to include more features in the future):
 
 - Image Preview/Upload
 - Replacement of native browser's `alert()` function
-- Performing AJAX **GET** requests
-- Performing AJAX **POST** requests
-- Exposes some AJAX loading indicator functions which you can use for your project (Modal, Alert box, etc).
-- Triggers events on successful AJAX completion
+- Performing AJAX **GET** requests via links (and can display the result as a modal within the same page)
+- Exposes some AJAX loading indicator functions which you can use for your project (Modal, Alert box, etc)
 - Displays pages as Modal
 - Etc.
 
@@ -23,15 +21,12 @@ Especially for AJAX requests, you don't have to create AJAX scripts/files for di
   - [Via Normal File Input](#via-normal-file-input)
 - [Ask Before Running A Link](#5-ask-before-running-a-link)
 - [Running AJAX GET Requests Via Links](#6-running-ajax-get-requests-via-links)
-- [Running AJAX GET Requests In General](#7-running-ajax-requests-in-general)
-  - [Returning Response](#returning-response)
 - [Opening Page As Modal](#8-opening-page-as-modal)
 - [Bonus](#bonus)  
   - [Emitting Events](#emitting-events)
   - [Utility Functions](#utility-functions)
     - [Displaying Spinner](#displaying-spinner)
     - [Displaying Pop Up Or Alert](#displaying-pop-up-or-alert)
-    - [Lazy-loading Images](#lazy-loading-images)
     - [Bottom-To-Top Popup](#bottom-to-top-popup)
 
 ## Installation and Usage
@@ -252,6 +247,7 @@ You can also warn (or instruct) before running the request by using the strategy
 href="/delete-user">Remove</a>
 ```
 
+
 Or with adding an event:
 
 ```html
@@ -259,222 +255,10 @@ Or with adding an event:
 href="/delete-user">Remove</a>
 ```
 
-## 4. Running AJAX Requests In General
-
-We advice that each input type be placed within a `div` for proper styling and alignment. If you use our `registerEventListeners()` function then make sure the `form` has the id or class attribute set to `form`. Example:
-
-```html
-<form action="submit" id="form" method="post">
-    <div>
-        <input type="text" name='name'>
-    </div>
-
-    <div>
-        <input type="email" name='email'>
-    </div>
-
-    <div>
-        <input type="password" name='password'>
-    </div>
-    
-    <div>
-        <input type="submit" value="Log In" />
-    </div>
-</form>
-```
-
-You can put as many input elements as you like and they'll be submitted to your server. By default the request will be sent as `"FormData"`. However, you can choose to send the request in `REQUEST PAYLOAD` (JSON) format. In this case you just have to specify it as a data attribute in the form tag itself and the library will take care of the rest. Example:
-
-``` html
-<form action="submit" id="form" method="post" data-json='true'>
-    <div>
-        <input type="text" name='name'>
-    </div>
-
-    <div>
-        <input type="email" name='email'>
-    </div>
-
-    <div>
-        <input type="password" name='password'>
-    </div>
-    
-    <div>
-        <input type="submit" value="Log In" />
-    </div>
-</form>
-```
-
-### NB: This transformation is only possible with non-GET requests
-
-It is important that your submit button has a `type="submit"` attribute so we can identify the trigger. Also, as much as possible, try to enclose your `input` tag(s) in a `div`.
-
----
-
-## Returning Response
-
-When returning response from server (which will usually come in a JSON format) **ije** will try to detect if it has a **"message"** property and then display it as successful (or failure) message to the user else it falls to default and just displays whatever was sent to the client. Unless you just send a plain string as response, you should structure your response. An example is:
-
-```json
-{
-    "message": {
-        "message":"Your message"
-    }
-}
-```
-
-OR
-
-```json
-{
-    "message":"Your message"
-}
-```
-
-OR
-
-```json
-{
-    "Your message"
-}
-```
-
-Or, if it is a validation message based on some form request (with a **HTTP status** of 422):
-
-```json
-{
-    "message": {
-        "message":"Please enter your email address here",
-        "target":"email" //This refers to the HTML input element that this validation message is meant for (if any). It is completely optional and should have the target's value as the exact input "NAME" attribute
-    }
-} 
-```
-
-OR
-
-```json
-{
-    "message":"Please enter your email address here",
-    "target":"email" //This refers to the HTML input form 'NAME' that this validation message is meant for (if any). It is completely optional and should have the target's value as the exact input "NAME" attribute
-}
-```
-
-With the above the appropriate error message will be displayed right next after the input element it's (message) meant for (as long as the appropraite **HTTP status code** is set. For form request(s) please use **422** for error response(s) when dealing with form validation).
-
----
-
-> If you use our [Zam PHP package](https://github.com/SirMekus/zam), using the `request()` function, this has already been taken care of so you can just, in case of form validation, pass a string as documented in the package.
-> If you, however, return response manually - maybe after some checks and validation - a `message` key will always be set so you don't have to set it yourself unless you are passing in an array which you'll like to listen to in the front-end (via event listening as discussed below). Example:
-
-```php
-//php
-//Default status code is 200
-return response('your success response');
-```
-
-OR
-
-```php
-//php
-//With your preferred status code
-return response('your error response', 422);
-```
-
-OR
-
-```php
-//php
-//This should always be 200.
-return response(['message'=>'your success response', 'url'=>'webloit.com']);
-```
-
----
-
-If you wish to pass an array but wish for a particular response/message to be displayed to the user (from the array) then you must name that array key `message` (though it may not always be displayed to the user).
-
-If you want a redirect to take place on successful request then you should pass the URL/link you want the user to be directed to (as response) by adding a `url` property to the response. Please note that redirection is only done on successful response. If you will like it to done at your own convenience then pass an event and listen to it so you can implement it the way you like. A typical response may look like:
-
-```json
-{
-  "url": "https://www.webloit.com"
-}
-```
-
-OR
-
-```json
-{
-  "message": "Your message",
-  "url": "https://www.webloit.com"
-}
-```
-
-OR
-
-```json
-{
-    "message":{
-        "message": "Your message",
-        "url": "https://www.webloit.com"
-    }
-}
-```
-
-If you want the link to be opened on a different tab then you should add a `data-ext` attribute to your form tag (with any value; it doesn't matter here). Example:
-
-```html
-<form action="submit" id="form" method="post" data-ext='true'>
-//
-</form>
-
-```
-
-For proper message styling and presentation we use the **HTTP status** to detect error or failed request(s) so when returning response(s) we advice you use appropriate **HTTP status header(s)**. No need to append the "Status Code" as property in the result in the reward because we don't use it.
-
-## 8. Opening Page As Modal
-
-You may want to open a page (via a link) as a modal. This page should typically only contain elements without the `html` or `body` tag; for instance, a form. If you imported the `registerEventListeners` function of this package in your project there is already an event listener for such. All you need to do is give an `a` element the `open-as-modal` class and you're good to go (Or, import the function itself - `openAsModal` - and attach to your custom event listener (if you didn't and will like to use some of our functions itself)) Example:
-
-```HTML
-<a href="/your-link-goes-here" class="open-as-modal">Open Modal</a>
-```
-
-The link will be called and the called page will be displayed as modal in the modal box.
-
-By default, the modal will occupy the full screen on desktop or a bigger device (but will be contained on smaller device(s)). To make the modal smaller on desktop give it a `data-shrink` attribute with any value you like. Example:
-
-```HTML
-<a href="/your-link-goes-here" class="open-as-modal" data-shrink='true'>Open Modal</a>
-```
-
-Also, clicking outside the modal body will close the modal. To disable this behaviour set a data `data-static` with any value you like. Example:
-
-```HTML
-<a href="/your-link-goes-here" class="open-as-modal" data-static='true'>Open Modal</a>
-```
-
-Now clicking outside the modal will not close the modal anymore.
-
----
-
-## BONUS
-
----
-
-## Emitting Events
-
-For either GET or POST requests you may want to perform some other actions as well when the request is successful. You can simply do this by adding a `data-bc=*` attribute to either the `a` element or `form` tag with the name of the event you want to emit as value. We will then emit this event when the request is successful (a **200 HTTP status code** is received) which you can listen to in your project. We'll pass across any data received from the server as parameter in the emitted event as well so you can inspect and do whatever you wish with it. Example:
-
-```html
-<form data-bc="myevent" action="/action" class="form" method="get">
-    //input
-</form>
-```
-
-And then listen to it like so:
+The **user_removed** event will be emitted which you can then listen to in your script like so:
 
 ```javascript
-document.addEventListener("myevent", (event) => {
+document.addEventListener("user_removed", (event) => {
     //event => contains the response from server and some other properties which you should inspect to find out
 });
 ```

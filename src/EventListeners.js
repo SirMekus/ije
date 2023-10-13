@@ -1,5 +1,5 @@
 import { triggerFileChanger, uploadImage, removeImage } from "./ImageUpload.js";
-import { alertBeforeRunning, openAsModal, getRequest, postRequest } from "./EventCallbacks.js"
+import { alertBeforeRunning, openAsModal, getRequest } from "./EventCallbacks.js"
 import { on } from "mmuo"
 
 function triggerFileChangerEvent(){
@@ -26,10 +26,6 @@ function getRequestEvent(){
     on(".run-get-request", "click", getRequest);
 }
 
-function postRequestEvent(){
-    on("#form .form", "submit", postRequest);
-}
-
 function registerEventListeners() {
     triggerFileChangerEvent()
 
@@ -43,9 +39,6 @@ function registerEventListeners() {
     alertBeforeRunningEvent()
 
     getRequestEvent()
-
-    //General for all pages that use a POST submit method especially.
-    postRequestEvent()
 }
 
-export { registerEventListeners, triggerFileChangerEvent, uploadImageEvent, removeImageEvent, openAsModalEvent, alertBeforeRunningEvent, getRequestEvent, postRequestEvent };
+export { registerEventListeners, triggerFileChangerEvent, uploadImageEvent, removeImageEvent, openAsModalEvent, alertBeforeRunningEvent, getRequestEvent };
