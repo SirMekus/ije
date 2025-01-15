@@ -54,14 +54,19 @@ function DisplayAsToast(msg, status='info') {
     let bgClass
 
     switch(status){
-        case true:
+        case 'success':
             bgClass = 'bg-success'
             break;
 
-        case false:
+        case 'error':
             bgClass = 'bg-danger'
             break;
 
+        case 'warning':
+            bgClass = 'bg-warning'
+            break;
+
+        // info
         default:
             bgClass = 'bg-primary'
     }

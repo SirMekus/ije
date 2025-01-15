@@ -119,7 +119,7 @@ function getRequest (event) {
         }).catch((error) => {
             clickedLink.dataset.error ? 
                 document.dispatchEvent(new CustomEvent(clickedLink.dataset.error, { detail: error })) :
-                DisplayAsToast(`<div class='text-danger'>${error.response?.data?.message ?? error.data?.message}</div>`);
+                DisplayAsToast(`<div class='text-danger'>${error.response?.data?.message ?? error.data?.message}</div>`,'error');
         }).then(() => {
             removeSpinner()
         })

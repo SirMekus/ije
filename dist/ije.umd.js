@@ -55,13 +55,18 @@
       var bgClass;
 
       switch (status) {
-        case true:
+        case 'success':
           bgClass = 'bg-success';
           break;
 
-        case false:
+        case 'error':
           bgClass = 'bg-danger';
           break;
+
+        case 'warning':
+          bgClass = 'bg-warning';
+          break;
+        // info
 
         default:
           bgClass = 'bg-primary';
@@ -354,7 +359,7 @@
 
           clickedLink.dataset.error ? document.dispatchEvent(new CustomEvent(clickedLink.dataset.error, {
             detail: error
-          })) : DisplayAsToast("<div class='text-danger'>".concat((_error$response$data$ = (_error$response = error.response) === null || _error$response === void 0 ? void 0 : (_error$response$data = _error$response.data) === null || _error$response$data === void 0 ? void 0 : _error$response$data.message) !== null && _error$response$data$ !== void 0 ? _error$response$data$ : (_error$data = error.data) === null || _error$data === void 0 ? void 0 : _error$data.message, "</div>"));
+          })) : DisplayAsToast("<div class='text-danger'>".concat((_error$response$data$ = (_error$response = error.response) === null || _error$response === void 0 ? void 0 : (_error$response$data = _error$response.data) === null || _error$response$data === void 0 ? void 0 : _error$response$data.message) !== null && _error$response$data$ !== void 0 ? _error$response$data$ : (_error$data = error.data) === null || _error$data === void 0 ? void 0 : _error$data.message, "</div>"), 'error');
         }).then(function () {
           removeSpinner();
         });
