@@ -1,4 +1,4 @@
-import { showAlert, showSpinner,removeSpinner,showCanvass } from "./helper.js";
+import { showAlert, showSpinner,removeSpinner,showCanvass, DisplayAsToast } from "./helper.js";
 import { Modal } from 'bootstrap';
 
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -117,7 +117,9 @@ function getRequest (event) {
         }).then((response) => {
             document.dispatchEvent(new CustomEvent(clickedLink.dataset.bc, { detail: response }))
         }).catch((error) => {
-            showCanvass("<div class='text-danger'>"+error.response.data.message +"</div>")
+            clickedLink.dataset.error ? 
+                document.dispatchEvent(new CustomEvent(clickedLink.dataset.error, { detail: error })) :
+                DisplayAsToast(`<div class='text-danger'>${error.response?.data?.message ?? error.data?.message}</div>`);
         }).then(() => {
             removeSpinner()
         })

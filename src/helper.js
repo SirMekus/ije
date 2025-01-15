@@ -52,7 +52,7 @@ function showAlert(caption, href, textWord, classToUse=null, bc=null) {
 
 function DisplayAsToast(msg, status='info') {
     let bgClass
-    
+
     switch(status){
         case true:
             bgClass = 'bg-success'

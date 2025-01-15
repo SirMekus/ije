@@ -351,7 +351,11 @@ function getRequest(event) {
         detail: response
       }));
     }).catch(function (error) {
-      showCanvass("<div class='text-danger'>" + error.response.data.message + "</div>");
+      var _error$response$data$, _error$response, _error$response$data, _error$data;
+
+      clickedLink.dataset.error ? document.dispatchEvent(new CustomEvent(clickedLink.dataset.error, {
+        detail: error
+      })) : DisplayAsToast("<div class='text-danger'>".concat((_error$response$data$ = (_error$response = error.response) === null || _error$response === void 0 ? void 0 : (_error$response$data = _error$response.data) === null || _error$response$data === void 0 ? void 0 : _error$response$data.message) !== null && _error$response$data$ !== void 0 ? _error$response$data$ : (_error$data = error.data) === null || _error$data === void 0 ? void 0 : _error$data.message, "</div>"));
     }).then(function () {
       removeSpinner();
     });
